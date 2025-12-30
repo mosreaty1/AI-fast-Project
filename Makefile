@@ -192,10 +192,35 @@ help-phase3:
 	@echo "2. Run: make app (test locally)"
 	@echo "3. Run: make deploy (publish to HF)"
 
-# Quick commands for presentations
+# Presentation commands
+presentation-prep:
+	@echo "Preparing for final presentation..."
+	@echo "1. Running baseline vs fine-tuned comparison..."
+	python demo_comparison.py
+	@echo "2. Generating evaluation visualizations..."
+	make eval-full
+	@echo "3. Creating sample submission..."
+	make infer
+	@echo ""
+	@echo "✓ Presentation materials ready!"
+	@echo "  - comparison.png (baseline vs fine-tuned)"
+	@echo "  - evaluation/evaluation_results.png"
+	@echo "  - submission.csv"
+	@echo ""
+	@echo "Next steps:"
+	@echo "  1. Review PRESENTATION_GUIDE.md"
+	@echo "  2. Start Streamlit: make demo"
+	@echo "  3. Practice your presentation!"
+
 demo:
-	@echo "Starting demo..."
+	@echo "Starting Streamlit demo app..."
+	@echo "Access at: http://localhost:8501"
 	streamlit run app.py
+
+demo-comparison:
+	@echo "Running baseline vs fine-tuned comparison..."
+	python demo_comparison.py
+	@echo "Results saved to comparison.png"
 
 kaggle-submit:
 	@echo "Generating Kaggle submission..."
